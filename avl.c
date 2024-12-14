@@ -70,7 +70,9 @@ AVLNode* rotateAVL(AVLNode* node){
 }
 
 AVLNode* insertAVL(AVLNode* node, int station_id, int capacity){
-    if(node)==NULL return createNode(station_id, capacity);
+    if(node==NULL){ 
+        return createNode(station_id, capacity);
+    }
     if (station_id < node->station_id){
         node->left = insertAVL(node->left, station_id, capacity);
     }
