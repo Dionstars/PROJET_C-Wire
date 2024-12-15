@@ -109,4 +109,83 @@ identifiant_centrale=$4
 option_help=$5
 
 
-# Faire les vérifications des options + création du répertoire + exécution C + Gnuplot
+                     # VERIFICATIONS DES OPTIONS SELECTIONNEES PAR L'UTILISATEUR
+
+
+
+# Si l'option d'aide est présente, afficher l'aide et quitter
+if [ "$option_help" == "-h" ]; then
+    Help
+fi
+
+# Vérification des paramètres obligatoires
+if [ -z "$chemin_fichier_csv" ] || [ -z "$type_station" ] || [ -z "$type_conso" ]; then
+    echo "Error : The required parameters are missing."
+    Help
+fi
+
+# Vérification de la validité des paramètres
+Options
+
+# Vérification de l'existence de l'exécutable C
+Executable_C
+
+
+
+
+
+                    # CREATION DU REPERTOIRE ET DEBUT DU CALCUL DU TEMPS DE TRAITEMENTS DES DONNEES
+
+
+
+# Création des répertoires tmp et graphs
+CreateRepertory
+
+# Calcul du temps de traitement
+start_time=$(date +%s)
+
+
+
+
+                    # EXECUTION DU PROGRAMME C ET AFFICHAGE DU TEMPS D'EXECUTION
+
+
+
+# Exécution du programme C
+if [ -z "$identifiant_centrale" ]; then
+    ./programme_c "$chemin_fichier_csv" "$type_station" "$type_conso"
+else
+    ./programme_c "$chemin_fichier_csv" "$type_station" "$type_conso" "$identifiant_centrale"
+fi
+
+# Vérification du succès de l'exécution du programme C
+if [ $? -ne 0 ]; then
+    echo "Error : C program failed."
+    exit 1
+fi
+
+# Fin du traitement
+end_time=$(date +%s)
+execution_time=$((end_time - start_time))
+
+echo "Processing time  : $execution_time secondes."
+
+
+
+                    # VERIFICATION ET INSTALLATION DE GNUPLOT
+
+
+# Vérifier si gnuplot est installé, sinon l'installer
+CheckAndInstallGnuplot
+
+
+
+
+                    # CREATION DE GRAPHIQUE A L'AIDE DU PROGRAMME GNUPLOT
+
+
+
+# Création des graphiques
+if [ -f "tmp/resultats.txt" ]; then
+    gnuplot -e "set terminal png; set output 'graphs/resultat.png'; plot 'tmp/resultats.txt' using 1:2 with lines"
+fi
