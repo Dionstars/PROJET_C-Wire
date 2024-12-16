@@ -118,9 +118,9 @@ function AskParameters(){
     echo "  3) all"
     read -p "Choice (1/2/3): " consu_choice
     case $consu_choice in
-      1) type_station="comp";;
-      2) type_station="indiv";;
-      3) type_station="all";;
+      1) type_conso="comp";;
+      2) type_conso="indiv";;
+      3) type_conso="all";;
       *) echo "Invalid choice."; exit 1;;
     esac
   fi
@@ -163,6 +163,13 @@ fi
 #Demande les paramètres
 AskParameters
 
+
+#Affiche les paramètres de l'utilisateur
+echo "Parameters selected :"
+echo " -CSV file path     : $chemin_fichier_csv"
+echo " -Station type      : $type_station"
+echo " -Consumer type     : $type_conso"
+echo " -Power plants's Id : ${id_centrale:-None}"
 
 # Vérification de la validité des paramètres
 Options
