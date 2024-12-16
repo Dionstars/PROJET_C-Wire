@@ -93,6 +93,42 @@ function Options() {
 }
 
 
+function AskParameters(){
+ # if[-z "chemin_fichier_csv"];then
+  #  read -p "Enter the path to the CSV file :" chemin_fichier_csv
+  #fi
+
+  if[-z "type_station"];then
+    echo "Select the type of station :"
+    echo "  1) hvb"
+    echo "  2) hva"
+    echo "  3) lv"
+    read -p "Choice (1/2/3): " station_choice
+    case $station_choice in
+      1) type_station="hvb";;
+      2) type_station="hva";;
+      3) type_station="lv";;
+      *) echo "Invalid choice."; exit 1;;
+    esac
+  fi
+  if[-z "type_consu"];then
+    echo "Select the type of station :"
+    echo "  1) comp"
+    echo "  2) indiv"
+    echo "  3) all"
+    read -p "Choice (1/2/3): " consu_choice
+    case $consu_choice in
+      1) type_station="comp";;
+      2) type_station="indiv";;
+      3) type_station="all";;
+      *) echo "Invalid choice."; exit 1;;
+    esac
+  fi
+  if [-z "id-centrale"]; then
+    read -p "Enter the power plant's ID :" id-centrale
+  fi
+}
+      
 
 
 
