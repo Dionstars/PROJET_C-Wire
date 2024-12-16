@@ -160,6 +160,10 @@ if [ -z "$chemin_fichier_csv" ] || [ -z "$type_station" ] || [ -z "$type_conso" 
     Help
 fi
 
+#Demande les paramètres
+AskParameters
+
+
 # Vérification de la validité des paramètres
 Options
 
