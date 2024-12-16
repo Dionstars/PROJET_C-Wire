@@ -94,11 +94,11 @@ function Options() {
 
 
 function AskParameters(){
- # if[-z "chemin_fichier_csv"];then
+ # if[-z "$chemin_fichier_csv"];then
   #  read -p "Enter the path to the CSV file :" chemin_fichier_csv
   #fi
 
-  if[-z "type_station"];then
+  if[-z "$type_station"];then
     echo "Select the type of station :"
     echo "  1) hvb"
     echo "  2) hva"
@@ -111,7 +111,7 @@ function AskParameters(){
       *) echo "Invalid choice."; exit 1;;
     esac
   fi
-  if[-z "type_consu"];then
+  if[-z "$type_consu"];then
     echo "Select the type of station :"
     echo "  1) comp"
     echo "  2) indiv"
@@ -124,7 +124,7 @@ function AskParameters(){
       *) echo "Invalid choice."; exit 1;;
     esac
   fi
-  if [-z "identifiant_centrale"]; then
+  if [-z "$identifiant_centrale"]; then
     read -p "Enter the power plant's ID :" identifiant_centrale
   fi
 }
