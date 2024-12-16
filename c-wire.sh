@@ -1,4 +1,4 @@
-#!/bin/bash
+ant#!/bin/bash
 
 
 
@@ -124,8 +124,8 @@ function AskParameters(){
       *) echo "Invalid choice."; exit 1;;
     esac
   fi
-  if [-z "id-centrale"]; then
-    read -p "Enter the power plant's ID :" id-centrale
+  if [-z "identifiant_centrale"]; then
+    read -p "Enter the power plant's ID :" identifiant_centrale
   fi
 }
       
@@ -169,7 +169,7 @@ echo "Parameters selected :"
 echo " -CSV file path     : $chemin_fichier_csv"
 echo " -Station type      : $type_station"
 echo " -Consumer type     : $type_conso"
-echo " -Power plants's Id : ${id_centrale:-None}"
+echo " -Power plants's Id : ${identifiant_centrale:-None}"
 
 # Vérification de la validité des paramètres
 Options
