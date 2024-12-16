@@ -53,7 +53,7 @@ AVLNode* rotateLeft(AVLNode* node){
 }
 
 AVLNode* rotateAVL(AVLNode* node){
-    balance(node);
+    node->balance = balance(node);
     if (node->balance > 1){
         if (node->left && node->left->balance < 0){
             node->left = rotateLeft(node->left);
@@ -80,7 +80,7 @@ AVLNode* insertAVL(AVLNode* node, int station_id, int capacity){
         node->right = insertAVL(node->right, station_id, capacity);
     }
     else return node;
-    return balance(node);
+    return rotateAVL(node);
 }
 
 AVLNode* searchNode(AVLNode* node, int station_id){
